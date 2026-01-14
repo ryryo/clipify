@@ -1,214 +1,214 @@
 # Clipify
 
-**Web content clipper - Convert, extract, and save web pages in multiple formats**
+**Webコンテンツクリッパー - Webページを複数の形式で変換、抽出、保存**
 
-Clipify is a powerful browser extension that allows you to extract, convert, and save web content in various formats including Markdown, HTML, and screenshots. Built with modern web technologies and designed for productivity.
+Clipifyは、Markdown、HTML、スクリーンショットなど、さまざまな形式でWebコンテンツを抽出、変換、保存できる強力なブラウザ拡張機能です。最新のWeb技術で構築され、生産性向上のために設計されています。
 
-## ✨ Features
+## ✨ 機能
 
-- **Smart Content Extraction**: Uses Mozilla's Readability algorithm to extract clean, readable content from web pages
-- **Markdown Conversion**: Convert web pages to well-formatted Markdown with YAML frontmatter
-- **Multiple Export Formats**: 
-  - Markdown with metadata
-  - Clean HTML
-  - Page screenshots
-- **One-Click Actions**: Copy to clipboard or download files instantly
-- **Rich Metadata**: Automatically extracts title, publication date, word count, and more
-- **Table Support**: Intelligent table conversion to Markdown format
-- **Cross-Browser Compatible**: Works on Chrome and Firefox
+- **スマートコンテンツ抽出**: MozillaのReadabilityアルゴリズムを使用して、Webページからクリーンで読みやすいコンテンツを抽出
+- **Markdown変換**: YAMLフロントマター付きの整ったMarkdown形式にWebページを変換
+- **複数のエクスポート形式**: 
+  - メタデータ付きMarkdown
+  - クリーンなHTML
+  - ページスクリーンショット
+- **ワンクリック操作**: クリップボードにコピーまたはファイルを即座にダウンロード
+- **豊富なメタデータ**: タイトル、公開日、単語数などを自動抽出
+- **テーブル対応**: テーブルをMarkdown形式にインテリジェントに変換
+- **クロスブラウザ対応**: ChromeとFirefoxで動作
 
-## 🚀 Installation
+## 🚀 インストール
 
-### Development Setup
+### 開発環境のセットアップ
 
-1. **Clone the repository**
+1. **リポジトリをクローン**
    ```bash
-   git clone https://github.com/moritalous/clipify.git
+   git clone https://github.com/ryryo/clipify.git
    cd clipify
    ```
 
-2. **Install dependencies**
+2. **依存関係をインストール**
    ```bash
    npm install
    ```
 
-3. **Start development server**
+3. **開発サーバーを起動**
    ```bash
-   # For Chrome
+   # Chrome用
    npm run dev
    
-   # For Firefox
+   # Firefox用
    npm run dev:firefox
    ```
 
-4. **Load the extension**
-   - **Chrome**: Open `chrome://extensions/`, enable Developer mode, click "Load unpacked" and select the `.output/chrome-mv3` folder
-   - **Firefox**: Open `about:debugging`, click "This Firefox", click "Load Temporary Add-on" and select the manifest file from `.output/firefox-mv2`
+4. **拡張機能を読み込む**
+   - **Chrome**: `chrome://extensions/`を開き、デベロッパーモードを有効にして「パッケージ化されていない拡張機能を読み込む」をクリックし、`.output/chrome-mv3`フォルダを選択
+   - **Firefox**: `about:debugging`を開き、「このFirefox」をクリック、「一時的なアドオンを読み込む」をクリックし、`.output/firefox-mv2`からマニフェストファイルを選択
 
-### Production Build
+### 本番ビルド
 
 ```bash
-# Build for Chrome
+# Chrome用にビルド
 npm run build
 
-# Build for Firefox
+# Firefox用にビルド
 npm run build:firefox
 
-# Create distribution packages
+# 配布パッケージを作成
 npm run zip
 npm run zip:firefox
 ```
 
-## 🎯 Usage
+## 🎯 使い方
 
-1. **Navigate to any web page** you want to clip
-2. **Click the Clipify extension icon** in your browser toolbar
-3. **Wait for automatic content extraction** - the extension will analyze the page using Readability
-4. **Choose your preferred action**:
-   - **Copy Markdown**: Copy formatted Markdown to clipboard
-   - **Download Markdown**: Save as `.md` file
-   - **Copy HTML**: Copy clean HTML to clipboard
-   - **Download HTML**: Save as `.html` file
-   - **Copy Screenshot**: Copy page screenshot to clipboard
-   - **Save Screenshot**: Download page screenshot
+1. **クリップしたい任意のWebページに移動**
+2. **ブラウザツールバーのClipify拡張機能アイコンをクリック**
+3. **自動コンテンツ抽出を待つ** - 拡張機能がReadabilityを使用してページを解析
+4. **希望のアクションを選択**:
+   - **Markdownをコピー**: フォーマットされたMarkdownをクリップボードにコピー
+   - **Markdownをダウンロード**: `.md`ファイルとして保存
+   - **HTMLをコピー**: クリーンなHTMLをクリップボードにコピー
+   - **HTMLをダウンロード**: `.html`ファイルとして保存
+   - **スクリーンショットをコピー**: ページスクリーンショットをクリップボードにコピー
+   - **スクリーンショットを保存**: ページスクリーンショットをダウンロード
 
-## 📋 Output Format
+## 📋 出力形式
 
-### Markdown with YAML Frontmatter
+### YAMLフロントマター付きMarkdown
 
 ```markdown
 ---
-title: "Article Title"
+title: "記事タイトル"
 source_url: "https://example.com/article"
 source: "Example Site"
 published_time: "2024-01-01T00:00:00Z"
 extracted_at: "2024-01-01T12:00:00Z"
 word_count: 1500
 content_length: 8000
-excerpt: "Article summary..."
+excerpt: "記事の要約..."
 ---
 
-# Article Content
+# 記事コンテンツ
 
-Your converted markdown content here...
+変換されたMarkdownコンテンツがここに表示されます...
 ```
 
-### Features of Markdown Conversion
+### Markdown変換の機能
 
-- **YAML Frontmatter**: Rich metadata including source URL, publication date, word count
-- **Clean Formatting**: Proper heading hierarchy, lists, and emphasis
-- **Table Support**: HTML tables converted to Markdown table format
-- **Code Block Preservation**: Maintains code formatting with fenced code blocks
-- **Link Handling**: Converts links to inline Markdown format
+- **YAMLフロントマター**: ソースURL、公開日、単語数などの豊富なメタデータ
+- **クリーンなフォーマット**: 適切な見出し階層、リスト、強調
+- **テーブル対応**: HTMLテーブルをMarkdownテーブル形式に変換
+- **コードブロックの保持**: フェンス付きコードブロックでコードフォーマットを維持
+- **リンクの処理**: リンクをインラインMarkdown形式に変換
 
-## 🛠️ Technical Details
+## 🛠️ 技術詳細
 
-### Architecture
+### アーキテクチャ
 
-- **Framework**: Built with [WXT](https://wxt.dev/) - Modern web extension framework
-- **UI**: React 19 with TypeScript
-- **Content Extraction**: Mozilla Readability for clean content extraction
-- **Markdown Conversion**: Turndown.js with custom rules
-- **Build System**: Vite-powered development and build process
+- **フレームワーク**: [WXT](https://wxt.dev/)で構築 - モダンなWeb拡張機能フレームワーク
+- **UI**: TypeScriptを使用したReact 19
+- **コンテンツ抽出**: クリーンなコンテンツ抽出のためのMozilla Readability
+- **Markdown変換**: カスタムルール付きTurndown.js
+- **ビルドシステム**: Viteを活用した開発とビルドプロセス
 
-### Key Components
+### 主要コンポーネント
 
-- **Background Script**: Handles extension lifecycle
-- **Content Script**: Injected into web pages for content extraction
-- **Popup Interface**: React-based UI for user interactions
-- **Converter Utilities**: Custom Markdown conversion logic
-- **Screenshot Utilities**: Page capture functionality
+- **バックグラウンドスクリプト**: 拡張機能のライフサイクルを処理
+- **コンテンツスクリプト**: コンテンツ抽出のためにWebページに注入
+- **ポップアップインターフェース**: ユーザーインタラクション用のReactベースUI
+- **コンバーターユーティリティ**: カスタムMarkdown変換ロジック
+- **スクリーンショットユーティリティ**: ページキャプチャ機能
 
-### Browser Permissions
+### ブラウザ権限
 
-- `activeTab`: Access current tab content
-- `clipboardWrite`: Copy content to clipboard
-- `tabs`: Query and interact with browser tabs
+- `activeTab`: 現在のタブコンテンツへのアクセス
+- `clipboardWrite`: コンテンツをクリップボードにコピー
+- `tabs`: ブラウザタブのクエリとインタラクション
 
-## 🧪 Development
+## 🧪 開発
 
-### Available Scripts
+### 利用可能なスクリプト
 
 ```bash
-# Development
-npm run dev              # Start Chrome development server
-npm run dev:firefox      # Start Firefox development server
+# 開発
+npm run dev              # Chrome開発サーバーを起動
+npm run dev:firefox      # Firefox開発サーバーを起動
 
-# Building
-npm run build            # Build for Chrome
-npm run build:firefox    # Build for Firefox
-npm run zip              # Create Chrome distribution package
-npm run zip:firefox      # Create Firefox distribution package
+# ビルド
+npm run build            # Chrome用にビルド
+npm run build:firefox    # Firefox用にビルド
+npm run zip              # Chrome配布パッケージを作成
+npm run zip:firefox      # Firefox配布パッケージを作成
 
-# Code Quality
-npm run lint             # Run ESLint
-npm run lint:fix         # Fix ESLint issues
-npm run format           # Format code with Prettier
-npm run format:check     # Check code formatting
-npm run compile          # TypeScript compilation check
-npm run check            # Run all checks (compile + lint + format)
-npm run fix              # Fix all issues (lint + format)
+# コード品質
+npm run lint             # ESLintを実行
+npm run lint:fix         # ESLintの問題を修正
+npm run format           # Prettierでコードをフォーマット
+npm run format:check     # コードフォーマットをチェック
+npm run compile          # TypeScriptコンパイルチェック
+npm run check            # すべてのチェックを実行（コンパイル + リント + フォーマット）
+npm run fix              # すべての問題を修正（リント + フォーマット）
 ```
 
-### Project Structure
+### プロジェクト構造
 
 ```
 ├── entrypoints/
-│   ├── background.ts           # Background script
-│   ├── content.ts             # Content script for page interaction
-│   └── popup/                 # Popup UI components
-│       ├── App.tsx            # Main app component
-│       ├── components/        # React components
-│       └── hooks/             # Custom React hooks
+│   ├── background.ts           # バックグラウンドスクリプト
+│   ├── content.ts             # ページインタラクション用コンテンツスクリプト
+│   └── popup/                 # ポップアップUIコンポーネント
+│       ├── App.tsx            # メインアプリコンポーネント
+│       ├── components/        # Reactコンポーネント
+│       └── hooks/             # カスタムReactフック
 ├── utils/
-│   ├── converter.ts           # Markdown conversion logic
-│   └── screenshot.ts          # Screenshot utilities
+│   ├── converter.ts           # Markdown変換ロジック
+│   └── screenshot.ts          # スクリーンショットユーティリティ
 ├── types/
-│   └── index.ts              # TypeScript type definitions
+│   └── index.ts              # TypeScript型定義
 ├── public/
-│   └── icon/                 # Extension icons
-└── wxt.config.ts             # WXT configuration
+│   └── icon/                 # 拡張機能アイコン
+└── wxt.config.ts             # WXT設定
 ```
 
-### Code Quality Tools
+### コード品質ツール
 
-- **ESLint**: JavaScript/TypeScript linting with React rules
-- **Prettier**: Code formatting
-- **TypeScript**: Type safety and better development experience
-- **React**: Modern UI development with hooks
+- **ESLint**: Reactルールを使用したJavaScript/TypeScriptリンティング
+- **Prettier**: コードフォーマット
+- **TypeScript**: 型安全性とより良い開発体験
+- **React**: フックを使用したモダンなUI開発
 
-## 🤝 Contributing
+## 🤝 コントリビューション
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run quality checks (`npm run check`)
-5. Commit your changes (`git commit -m 'Add amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+1. リポジトリをフォーク
+2. 機能ブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更を加える
+4. 品質チェックを実行 (`npm run check`)
+5. 変更をコミット (`git commit -m 'Add amazing feature'`)
+6. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+7. プルリクエストを開く
 
-### Development Guidelines
+### 開発ガイドライン
 
-- Follow the existing code style (enforced by ESLint and Prettier)
-- Add TypeScript types for new features
-- Test your changes in both Chrome and Firefox
-- Update documentation for new features
+- 既存のコードスタイルに従う（ESLintとPrettierで強制）
+- 新機能にTypeScript型を追加
+- ChromeとFirefoxの両方で変更をテスト
+- 新機能のドキュメントを更新
 
-## 📝 License
+## 📝 ライセンス
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+このプロジェクトはMITライセンスの下でライセンスされています - 詳細は[LICENSE](LICENSE)ファイルを参照してください。
 
-## 🐛 Issues & Support
+## 🐛 問題報告とサポート
 
-If you encounter any issues or have feature requests, please [open an issue](https://github.com/moritalous/clipify/issues) on GitHub.
+問題が発生した場合や機能リクエストがある場合は、GitHubで[issueを作成](https://github.com/ryryo/clipify/issues)してください。
 
-## 🙏 Acknowledgments
+## 🙏 謝辞
 
-- [Mozilla Readability](https://github.com/mozilla/readability) - Content extraction algorithm
-- [Turndown](https://github.com/mixmark-io/turndown) - HTML to Markdown conversion
-- [WXT](https://wxt.dev/) - Modern web extension development framework
-- [React](https://react.dev/) - UI framework
+- [Mozilla Readability](https://github.com/mozilla/readability) - コンテンツ抽出アルゴリズム
+- [Turndown](https://github.com/mixmark-io/turndown) - HTMLからMarkdownへの変換
+- [WXT](https://wxt.dev/) - モダンなWeb拡張機能開発フレームワーク
+- [React](https://react.dev/) - UIフレームワーク
 
 ---
 
-**Made with ❤️ for productivity enthusiasts**
+**生産性向上を愛する人々のために ❤️ で作られました**
