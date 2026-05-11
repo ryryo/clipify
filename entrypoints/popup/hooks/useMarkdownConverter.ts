@@ -4,6 +4,39 @@ import { useCallback, useEffect, useState } from 'react';
 
 type ConversionState = 'loading' | 'success' | 'error';
 
+const CONTENT_SCRIPT_FILE = 'content-scripts/content.js';
+
+function canExtractFromTab(tab: Browser.tabs.Tab): boolean {
+  return !!tab.url && /^(https?|file):\/\//.test(tab.url);
+}
+
+function isMissingContentScriptError(error: unknown): boolean {
+  return error instanceof Error && error.message.includes('Receiving end does not exist');
+}
+
+async function requestExtractContent(tabId: number, options: ExtractOptions) {
+  try {
+    return await browser.tabs.sendMessage(tabId, {
+      action: 'extractContent',
+      options,
+    });
+  } catch (error) {
+    if (!isMissingContentScriptError(error)) {
+      throw error;
+    }
+
+    await browser.scripting.executeScript({
+      target: { tabId },
+      files: [CONTENT_SCRIPT_FILE],
+    });
+
+    return await browser.tabs.sendMessage(tabId, {
+      action: 'extractContent',
+      options,
+    });
+  }
+}
+
 export function useMarkdownConverter(extractOptions?: ExtractOptions) {
   const [state, setState] = useState<ConversionState>('loading');
   const [result, setResult] = useState<ConversionResult | null>(null);
@@ -23,14 +56,15 @@ export function useMarkdownConverter(extractOptions?: ExtractOptions) {
           throw new Error('No active tab found');
         }
 
+        if (!canExtractFromTab(tab)) {
+          throw new Error('This page cannot be clipped. Please open a regular web page and try again.');
+        }
+
         // Use provided options or default to extractOptions or default behavior
         const extractionOptions = options || extractOptions || { useReadability: true };
 
-        // Send message to content script to extract content
-        const response = await browser.tabs.sendMessage(tab.id, {
-          action: 'extractContent',
-          options: extractionOptions,
-        });
+        // Send message to content script to extract content, injecting it first if needed.
+        const response = await requestExtractContent(tab.id, extractionOptions);
 
         if (!response.success) {
           throw new Error(response.error || 'Failed to extract content');

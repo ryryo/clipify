@@ -6,6 +6,6 @@ export default defineConfig({
   manifest: {
     name: 'Clipify',
     description: 'Web content clipper - Convert, extract, and save web pages in multiple formats',
-    permissions: ['activeTab', 'clipboardWrite', 'tabs'],
+    permissions: ['activeTab', 'clipboardWrite', 'scripting', 'tabs'],
   },
 });
