@@ -50,6 +50,23 @@ export default function MarkdownConverter() {
     );
   }
 
+  if (state === 'unsupported') {
+    return (
+      <div className="markdown-converter">
+        <ExtractModeToggle
+          useReadability={useReadability}
+          modeName={modeName}
+          onToggle={handleModeToggle}
+        />
+        <ErrorState
+          error={error}
+          onRetry={() => handleAutoConvert({ useReadability })}
+          variant="unsupported"
+        />
+      </div>
+    );
+  }
+
   if (state === 'success' && result && extractedContent) {
     return (
       <div className="markdown-converter">

@@ -2,12 +2,30 @@ import type { ConversionResult, ExtractedContent, ExtractOptions } from '@/types
 import { convertToMarkdown } from '@/utils/converter';
 import { useCallback, useEffect, useState } from 'react';
 
-type ConversionState = 'loading' | 'success' | 'error';
+type ConversionState = 'loading' | 'success' | 'error' | 'unsupported';
 
 const CONTENT_SCRIPT_FILE = 'content-scripts/content.js';
 
 function canExtractFromTab(tab: Browser.tabs.Tab): boolean {
   return !!tab.url && /^(https?|file):\/\//.test(tab.url);
+}
+
+async function getActiveTab(): Promise<Browser.tabs.Tab | undefined> {
+  const [lastFocusedTab] = await browser.tabs.query({
+    active: true,
+    lastFocusedWindow: true,
+  });
+
+  if (lastFocusedTab) {
+    return lastFocusedTab;
+  }
+
+  const [currentWindowTab] = await browser.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
+
+  return currentWindowTab;
 }
 
 function isMissingContentScriptError(error: unknown): boolean {
@@ -50,14 +68,16 @@ export function useMarkdownConverter(extractOptions?: ExtractOptions) {
 
       try {
         // Get current active tab
-        const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+        const tab = await getActiveTab();
 
-        if (!tab.id) {
+        if (!tab?.id) {
           throw new Error('No active tab found');
         }
 
         if (!canExtractFromTab(tab)) {
-          throw new Error('This page cannot be clipped. Please open a regular web page and try again.');
+          setError('Open a regular web page, then click Clipify again.');
+          setState('unsupported');
+          return;
         }
 
         // Use provided options or default to extractOptions or default behavior
